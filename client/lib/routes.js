@@ -4,8 +4,11 @@ Router.map(function() {
 		template: 'home',
 		layoutTemplate: 'layout',
 		data: function() {
+			var _id = Meteor.userId();
 			return {
-				posts: Post.list(Meteor.userId())
+				posts: Post.list(_id),
+				followers: Friendship.followers(_id),
+				followings: Friendship.followings(_id)
 			}
 		}
 	});
@@ -20,7 +23,9 @@ Router.map(function() {
 			Session.set('isFollowing', isFollowing);
 			return {
 				user: Meteor.users.findOne({_id: _id}),
-				posts: Post.list(_id)
+				posts: Post.list(_id),
+				followers: Friendship.followers(_id),
+				followings: Friendship.followings(_id)
 			}
 		}
 	});

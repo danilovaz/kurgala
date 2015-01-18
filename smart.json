@@ -1,0 +1,14 @@
+{
+  "name": "kurgala",
+  "description": "",
+  "author": "Danilo Vaz <danilo@canarinho.co>",
+  "version": "0.0.1",
+  "packages": {
+    "bootstrap-3": {},
+    "accounts-base": {},
+    "accounts-ui-bootstrap-3": {},
+    "accounts-password": {},
+    "accounts-facebook": {},
+     "iron-router": {}
+  }
+}

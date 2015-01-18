@@ -5,7 +5,7 @@ Template.post.events({
 		var textarea = template.find("textarea");
 		var name = Meteor.user().profile.name;
 
-		Post.publish(textarea.value, name);
+		Meteor.call("publishPost", textarea.value, name);
 
 		textarea.value = "";
 		

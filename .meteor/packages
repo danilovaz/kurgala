@@ -6,7 +6,6 @@
 
 meteor-platform
 autopublish
-insecure
 bootstrap-3
 accounts-base
 ian:accounts-ui-bootstrap-3

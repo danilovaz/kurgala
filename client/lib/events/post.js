@@ -3,11 +3,12 @@ Template.post.events({
 		e.preventDefault();
 
 		var textarea = template.find("textarea");
+		var name = Meteor.user().profile.name;
 
-		Post.publish(textarea.value);
+		Post.publish(textarea.value, name);
 
 		textarea.value = "";
 		
-		return false;
+		//return false;
 	}
 });

@@ -3,11 +3,15 @@ Router.map(function() {
 		path: '/',
 		template: 'home',
 		layoutTemplate: 'layout',
+		onBeforeAction: function() {
+			var _id = Meteor.userId();
+			this.subscribe("posts", _id);
+			this.subscribe("friendship", _id);
+		},
 		data: function() {
 			var _id = Meteor.userId();
-			var timelineIds = Friendship.timelineIds(_id);
 			return {
-				posts: Post.list(timelineIds),
+				posts: Post.find(),
 				followers: Friendship.followers(_id),
 				followings: Friendship.followings(_id)
 			}
@@ -17,15 +21,21 @@ Router.map(function() {
 		path: '/user/:_id',
 		template: 'user',
 		layoutTemplate: 'layout',
+		onBeforeAction: function() {
+			var _id = this.params._id;
+			this.subscribe("posts", _id);
+			this.subscribe("friendship", _id);
+			this.subscribe("isFollowing", _id);
+			this.subscribe("user", _id);
+		},
 		data: function() {
 			var _id = this.params._id;
-			var timelineIds = Friendship.timelineIds(_id);
 			var isFollowing = Friendship.isFollowing(_id);
 			Session.set('currentUserId', _id);
 			Session.set('isFollowing', isFollowing);
 			return {
 				user: Meteor.users.findOne({_id: _id}),
-				posts: Post.list(timelineIds),
+				posts: Post.find(),
 				followers: Friendship.followers(_id),
 				followings: Friendship.followings(_id)
 			}

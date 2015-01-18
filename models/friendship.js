@@ -29,6 +29,10 @@ Friendship.followers = function(friendId) {
 	return this.find({friendId: friendId}).count();
 };
 
+Friendship.followersAndFollowings = function(_id) {
+	return this.find({$or: [{userId: _id}, {friendId: _id}]});
+};
+
 Friendship.timelineIds = function(userId) {
 	var timelineIds = this.find({
 		userId: userId

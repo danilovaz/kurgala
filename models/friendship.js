@@ -28,3 +28,14 @@ Friendship.followings = function(userId) {
 Friendship.followers = function(friendId) {
 	return this.find({friendId: friendId}).count();
 };
+
+Friendship.timelineIds = function(userId) {
+	var timelineIds = this.find({
+		userId: userId
+	}).map(function(f) {
+		return f.friendId;
+	});
+	
+	timelineIds.push(userId);
+	return timelineIds;
+};

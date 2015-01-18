@@ -10,6 +10,9 @@ Post.publish = function(message, name) {
 	this.insert(params);
 };
 
-Post.list = function(userId) {
-	return this.find({userId: userId});
+Post.list = function(userIds) {
+	return this.find(
+		{userId: {"$in": userIds}},
+		{sort: {time: -1, name: 1}}	
+	);
 };
